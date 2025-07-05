@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Links - Gato</title>
+  <style>
+    body {
+      background: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 15px #0f84f5;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 3px solid #ffffff;
+      object-fit: cover;
+      box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-weight: 700;
+      color: #0f84f5;
+    }
+
+    p {
+      margin: 0 0 25px;
+      font-weight: 300;
+      color: #aaa;
+    }
+
+    .link-button {
+      background: #2e2e2e;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 12px 0;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .kick-button {
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    }
+
+    .kick-button:hover {
+      background-color: #000;
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88;
+    }
+
+    .twitter-button {
+      border: 2px solid #1da1f2;
+      box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2;
+    }
+
+    .twitter-button:hover {
+      background-color: #000;
+      color: #1da1f2;
+      text-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2, 0 0 40px #1da1f2;
+    }
+
+    .tiktok-button {
+      border: 2px solid #ff2d55;
+      box-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55;
+    }
+
+    .tiktok-hover-blue {
+      background-color: #000 !important;
+      color: #1da1f2 !important;
+      text-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2;
+      border: 2px solid #1da1f2 !important;
+      box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2 !important;
+    }
+
+    .tiktok-hover-pink {
+      background-color: #000 !important;
+      color: #ff2d55 !important;
+      text-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55;
+      border: 2px solid #ff2d55 !important;
+      box-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55 !important;
+    }
+
+    .instagram-button {
+      border: 2px solid #feda75;
+      box-shadow: 0 0 10px #feda75, 0 0 20px #f58529, 0 0 30px #dd2a7b;
+      background-color: #2e2e2e;
+      color: white;
+      transition: all 0.5s ease;
+    }
+
+    .instagram-button.expanded {
+      background-color: #000;
+    }
+
+    .instagram-button.expanded .btn-text {
+      color: #feda75;
+      text-shadow:
+        0 0 5px #feda75,
+        0 0 10px #f58529,
+        0 0 15px #dd2a7b,
+        0 0 20px #8134af,
+        0 0 25px #515bd4;
+      animation: shine-text 3s linear infinite;
+    }
+
+    @keyframes shine-text {
+      0%, 100% {
+        text-shadow:
+          0 0 5px #feda75,
+          0 0 10px #f58529,
+          0 0 15px #dd2a7b,
+          0 0 20px #8134af,
+          0 0 25px #515bd4;
+      }
+      50% {
+        text-shadow:
+          0 0 10px #feda75,
+          0 0 20px #f58529,
+          0 0 30px #dd2a7b,
+          0 0 40px #8134af,
+          0 0 50px #515bd4;
+      }
+    }
+
+    .kick-extra,
+    .twitter-extra,
+    .tiktok-extra,
+    .instagram-extra {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0 15px;
+      transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+    }
+
+    .kick-button:hover .kick-extra,
+    .twitter-button:hover .twitter-extra,
+    .tiktok-button:hover .tiktok-extra {
+      max-height: 80px;
+      opacity: 1;
+      padding: 15px;
+    }
+
+    .instagram-button.expanded .instagram-extra {
+      max-height: 80px;
+      opacity: 1;
+      padding: 15px;
+    }
+
+    .kick-extra img {
+      border-color: #00ff88;
+      box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    }
+
+    .twitter-extra img {
+      border-color: #1da1f2;
+      box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2;
+    }
+
+    .tiktok-extra img {
+      border-color: #ff2d55;
+      box-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55;
+    }
+
+    .instagram-extra img {
+      border-color: #feda75;
+      box-shadow: 0 0 10px #feda75, 0 0 15px #dd2a7b, 0 0 20px #8134af;
+    }
+
+    .kick-extra img,
+    .twitter-extra img,
+    .tiktok-extra img,
+    .instagram-extra img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid;
+      padding: 2px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .followers {
+      color: #ccc;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .kick-button:hover .followers {
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    }
+
+    .twitter-button:hover .followers {
+      color: #1da1f2;
+      text-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2;
+    }
+
+    .tiktok-hover-blue .followers {
+      color: #1da1f2 !important;
+      text-shadow: 0 0 10px #1da1f2;
+    }
+
+    .tiktok-hover-pink .followers {
+      color: #ff2d55 !important;
+      text-shadow: 0 0 10px #ff2d55;
+    }
+
+    .instagram-button.expanded .followers {
+      color: #feda75;
+      text-shadow:
+        0 0 5px #feda75,
+        0 0 10px #f58529,
+        0 0 15px #dd2a7b,
+        0 0 20px #8134af,
+        0 0 25px #515bd4;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="avatar" src="https://d.furaffinity.net/art/sodanalan1998/1687602003/1687602003.sodanalan1998_avdance.gif" alt="Avatar Gato" />
+    <h1>Gato</h1>
+    <p>Links waza</p>
+
+    <div class="links">
+      <a href="https://kick.com/7gatitopop7" class="link-button kick-button" target="_blank">
+        Kick
+        <div class="kick-extra">
+          <img src="https://files.kick.com/images/user/41691166/profile_image/conversion/e81581cc-43f9-495a-86e0-3a24de5e7eed-fullsize.webp" alt="Perfil Kick" />
+          <span class="followers">6 seguidores</span>
+        </div>
+      </a>
+      <a href="https://twitter.com/gatitolol333" class="link-button twitter-button" target="_blank">
+        Twitter
+        <div class="twitter-extra">
+          <img src="https://pbs.twimg.com/profile_images/1626066859949793280/x-4iJZcY_400x400.jpg" alt="Perfil Twitter" />
+          <span class="followers">91 seguidores</span>
+        </div>
+      </a>
+      <a href="https://www.tiktok.com/@gatitolol333_7" class="link-button tiktok-button" target="_blank" id="tiktokBtn">
+        TikTok
+        <div class="tiktok-extra">
+          <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/6df413fc1db5795fcec5dccd00a44456~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=62839c08&x-expires=1751821200&x-signature=B1zqgLRqPkUlwK498Lo1fxXw9Aw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva" alt="Perfil TikTok" />
+          <span class="followers">0 seguidores</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/7gatitopop7" class="link-button instagram-button" target="_blank" id="instagramBtn">
+        <span class="btn-text">Instagram</span>
+        <div class="instagram-extra">
+          <img src="https://i.pinimg.com/736x/01/7f/20/017f20b0c56ab4ab1d0e4c4f10b2dd23.jpg" alt="Perfil Instagram" />
+          <span class="followers">51 seguidores</span>
+        </div>
+      </a>
+    </div>
+
+    <footer>Creado por Gato • 2025</footer>
+  </div>
+
+  <script>
+    const tiktokBtn = document.getElementById('tiktokBtn');
+    let tiktokState = false;
+    tiktokBtn.addEventListener('mouseenter', () => {
+      tiktokBtn.classList.remove('tiktok-hover-blue', 'tiktok-hover-pink');
+      tiktokBtn.classList.add(tiktokState ? 'tiktok-hover-pink' : 'tiktok-hover-blue');
+      tiktokState = !tiktokState;
+    });
+    tiktokBtn.addEventListener('mouseleave', () => {
+      tiktokBtn.classList.remove('tiktok-hover-blue', 'tiktok-hover-pink');
+    });
+
+    const instagramBtn = document.getElementById('instagramBtn');
+    instagramBtn.addEventListener('mouseenter', () => {
+      instagramBtn.classList.add('expanded');
+    });
+    instagramBtn.addEventListener('mouseleave', () => {
+      instagramBtn.classList.remove('expanded');
+    });
+  </script>
+</body>
+</html>
